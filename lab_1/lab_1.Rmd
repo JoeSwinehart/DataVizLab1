@@ -1,0 +1,26 @@
+---
+title: "lab_1"
+authors: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r plot 1 draft}
+
+```
+
+```{r plot 1 final}
+
+```
+
+```{r plot 2 draft}
+
+```
+
+```{r plot 2 final}
+
+```
+
