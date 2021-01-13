@@ -8,6 +8,12 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r raw data}
+
+rstats_tweets
+
+```
+
 ```{r plot 1 draft}
 
 ```
