@@ -1,17 +1,16 @@
 ---
 title: "lab_1"
-authors: 
+authors: Janette Avelar, David Fainstein, Joe Swinehart, Makayla Whitney
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+install.packages("here")
 ```
 
 ```{r raw data}
-
-rstats_tweets
-
+rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
 ```{r plot 1 draft}
