@@ -10,7 +10,7 @@ install.packages("here")
 ```
 
 ```{r raw data}
-rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
+imported_rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
 ```{r plot 1 draft}
