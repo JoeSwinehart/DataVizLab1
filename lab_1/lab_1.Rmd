@@ -6,10 +6,11 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-install.packages("here")
+#install.packages("here")
 ```
 
 ```{r raw data}
+library(here)
 imported_rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
