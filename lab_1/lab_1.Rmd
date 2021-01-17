@@ -11,10 +11,24 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r raw data}
 library(here)
+library(tidyverse)
+library(dplyr)
 imported_rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
 ```{r plot 1 draft}
+cleantweets_plot1 <- imported_rstats_tweets %>% 
+  select("screen_name",
+         "user_id") %>% 
+  drop_na() %>% 
+  group_by(screen_name) %>% 
+  summarise(counts = n()) %>%
+  filter(counts > 1470) %>% 
+  arrange(desc(counts))
+  
+ggplot(cleantweets_plot1, aes(counts, screen_name)) +
+  geom_col()
+
 
 ```
 
