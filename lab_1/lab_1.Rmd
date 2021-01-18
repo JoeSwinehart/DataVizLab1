@@ -23,11 +23,15 @@ cleantweets_plot1 <- imported_rstats_tweets %>%
   drop_na() %>% 
   group_by(screen_name) %>% 
   summarise(counts = n()) %>%
-  filter(counts > 1470) %>% 
-  arrange(desc(counts))
+  filter(counts > 1470) %>%
+  arrange(desc(counts)) %>%
+  mutate(screen_names_order = fct_reorder(cleantweets_plot1$screen_name,
+                                          cleantweets_plot1$counts,
+                                          min))
   
-ggplot(cleantweets_plot1, aes(counts, screen_name)) +
-  geom_col()
+ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
+  geom_col() +
+  coord_flip()
 
 
 ```
