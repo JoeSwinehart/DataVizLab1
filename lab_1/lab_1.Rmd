@@ -25,8 +25,11 @@ cleantweets_plot1 <- imported_rstats_tweets %>%
   summarise(counts = n()) %>%
   filter(counts > 1470) %>%
   arrange(desc(counts)) %>%
-  mutate(screen_names_order = fct_reorder(cleantweets_plot1$screen_name,
-                                          cleantweets_plot1$counts,
+  # mutate(screen_names_order = fct_reorder(cleantweets_plot1$screen_name,
+  #                                         cleantweets_plot1$counts,
+  #                                         min))
+   mutate(screen_names_order = fct_reorder(screen_name,
+                                          counts,
                                           min))
   
 ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
