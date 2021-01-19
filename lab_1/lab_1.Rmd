@@ -41,6 +41,15 @@ ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
 
 ```{r plot 1 final}
 
+ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
+  geom_col(fill = "cornflowerblue") +
+  coord_flip() +
+  labs(title = "Most prolific #rstats tweeters",
+       subtitle = "Top 25 screen namse displayed",
+       x = "Count",
+       y = "Twitter Screen Name",
+       caption = "Data from Mike Kearny, distributed via #tidytuesday")
+
 ```
 
 ```{r plot 2 draft}
