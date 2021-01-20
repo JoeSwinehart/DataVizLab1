@@ -61,7 +61,6 @@ cleantweets_plot2 <- imported_rstats_tweets %>%
   count(month) %>% 
   filter(month != as_date("2019-01-01"))
 
-
   ggplot(cleantweets_plot2, aes(month, n)) +
   geom_line() +
     geom_smooth()
@@ -70,6 +69,13 @@ cleantweets_plot2 <- imported_rstats_tweets %>%
 ```
 
 ```{r plot 2 final}
-
+  ggplot(cleantweets_plot2, aes(month, n)) +
+  geom_line(size = 1, color = "#737373") +
+    geom_smooth(se = FALSE, color = "#d900e0") +
+  labs(x = "Year (data summarized by month)",
+       y = "Number of #rstats tweets",
+       title = "Growth of the #rstats hashtag on twitter over time",
+       caption = "Data from Mike Kearny, distributed via #tidytuesday") +
+  theme_minimal()
 ```
 
