@@ -71,7 +71,8 @@ cleantweets_plot2 <- imported_rstats_tweets %>%
 ```{r plot 2 final}
   ggplot(cleantweets_plot2, aes(month, n)) +
   geom_line(size = 1, color = "#737373") +
-    geom_smooth(se = FALSE, color = "#d900e0") +
+  geom_smooth(se = FALSE, color = "#d900e0") +
+  geom_ribbon(aes(ymin = 0, ymax = n), fill = "cornflowerblue", alpha = 0.3) +  
   labs(x = "Year (data summarized by month)",
        y = "Number of #rstats tweets",
        title = "Growth of the #rstats hashtag on twitter over time",
