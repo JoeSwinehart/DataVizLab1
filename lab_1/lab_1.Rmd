@@ -58,11 +58,13 @@ cleantweets_plot2 <- imported_rstats_tweets %>%
   select(created_at, hashtags) %>% 
   drop_na() %>% 
   mutate(month = round_date(created_at, "month")) %>% 
-  count(month)
+  count(month) %>% 
+  filter(month != as_date("2019-01-01"))
 
 
   ggplot(cleantweets_plot2, aes(month, n)) +
-  geom_line()
+  geom_line() +
+    geom_smooth()
 
   
 ```
