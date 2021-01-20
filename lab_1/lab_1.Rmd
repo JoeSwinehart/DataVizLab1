@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(here)
 library(tidyverse)
 library(dplyr)
+library(lubridate)
 imported_rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
@@ -53,7 +54,17 @@ ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
 ```
 
 ```{r plot 2 draft}
+cleantweets_plot2 <- imported_rstats_tweets %>% 
+  select(created_at, hashtags) %>% 
+  drop_na() %>% 
+  mutate(month = round_date(created_at, "month")) %>% 
+  count(month)
 
+
+  ggplot(cleantweets_plot2, aes(month, n)) +
+  geom_line()
+
+  
 ```
 
 ```{r plot 2 final}
