@@ -1,55 +1,58 @@
 ---
-title: "lab_1"
-authors: Janette Avelar, David Fainstein, Joe Swinehart, Makayla Whitney
+title: "Lab 1"
+author: 
+ - Janette Avelar
+ - David Fainstein 
+ - Joe Swinehart
+ - Makayla Whitney
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE)
 #install.packages("here")
 ```
 
 ```{r raw data}
 library(here)
 library(tidyverse)
-library(dplyr)
+# library(dplyr) # This is not needed because it's loaded with the tidyverse call above
 library(lubridate)
 imported_rstats_tweets <- readRDS(here("data", "rstats_tweets.rds"))
 ```
 
 ```{r plot 1 draft}
 cleantweets_plot1 <- imported_rstats_tweets %>% 
-  select("screen_name",
-         "user_id") %>% 
+  select(screen_name, user_id) %>% 
   drop_na() %>% 
-  group_by(screen_name) %>% 
-  summarise(counts = n()) %>%
-  filter(counts > 1470) %>%
-  arrange(desc(counts)) %>%
+  count(screen_name) %>% 
+  #summarise(counts = n()) %>% # I switched it to `count` instead
+  #filter(counts > 1470) %>% # Hmm... this is less than ideal. Instead use `slice()` after arranging
+  arrange(desc(n)) %>%
+  slice(1:25) %>% 
   # mutate(screen_names_order = fct_reorder(cleantweets_plot1$screen_name,
   #                                         cleantweets_plot1$counts,
   #                                         min))
-   mutate(screen_names_order = fct_reorder(screen_name,
-                                          counts,
-                                          min))
+   mutate(screen_names_order = fct_reorder(screen_name, n))
   
-ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
+ggplot(cleantweets_plot1, aes(screen_names_order, n)) +
   geom_col() +
-  coord_flip()
-
+  coord_flip() +
+  labs(y = "counts") # y because of `coord_flip()`
 
 ```
 
 ```{r plot 1 final}
-
-ggplot(cleantweets_plot1, aes(screen_names_order, counts)) +
+ggplot(cleantweets_plot1, aes(screen_names_order, n)) +
   geom_col(fill = "cornflowerblue") +
   coord_flip() +
   labs(title = "Most prolific #rstats tweeters",
        subtitle = "Top 25 screen names displayed",
        y = "Count",
        x = "Twitter Screen Name",
-       caption = "Data from Mike Kearny, distributed via #tidytuesday")
+       caption = "Data from Mike Kearny, distributed via #tidytuesday") +
+  theme_minimal()
 
 ```
 
@@ -61,15 +64,13 @@ cleantweets_plot2 <- imported_rstats_tweets %>%
   count(month) %>% 
   filter(month != as_date("2019-01-01"))
 
-  ggplot(cleantweets_plot2, aes(month, n)) +
+ggplot(cleantweets_plot2, aes(month, n)) +
   geom_line() +
-    geom_smooth()
-
-  
+  geom_smooth()
 ```
 
 ```{r plot 2 final}
-  ggplot(cleantweets_plot2, aes(month, n)) +
+ggplot(cleantweets_plot2, aes(month, n)) +
   geom_line(size = 1, color = "#737373") +
   geom_smooth(se = FALSE, color = "#d900e0") +
   geom_ribbon(aes(ymin = 0, ymax = n), fill = "cornflowerblue", alpha = 0.3) +  
